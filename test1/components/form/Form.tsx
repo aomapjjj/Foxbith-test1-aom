@@ -7,7 +7,18 @@ import RadioBtnGroup from "./RadioBtnGroup"
 import CheckBoxBtnGroup from "./CheckBoxBtnGroup"
 import SelectBox from "./SelectBox"
 import Btn from "./Btn"
+import { useActionState } from "react"
+import { createUser } from "@/utils/actions"
+import FormOutput from "../formOutput/FormOutput"
+import { useState } from "react"
+
 const Form = () => {
+  const [message, formActions] = useActionState(createUser, null)
+  const users = useState([])
+
+  
+  
+
   return (
     <div>
       <Box
@@ -22,8 +33,7 @@ const Form = () => {
           variant="h4"
           display="flex"
           component="div"
-          
-          sx={{ flexGrow: 1, justifyContent: "center" , marginTop:'50px'}}
+          sx={{ flexGrow: 1, justifyContent: "center", marginTop: "50px" }}
         >
           <p>Profile management</p>
         </Typography>
@@ -39,7 +49,7 @@ const Form = () => {
             backgroundColor: "white",
           }}
         >
-          <form action="">
+          <form action={formActions}>
             <Grid
               container
               rowSpacing={2}
@@ -86,8 +96,8 @@ const Form = () => {
             </Grid>
           </form>
         </Box>
+        <FormOutput name={message?.Name } email={message?.Email} lastname note={message?.Note}/>
       </Box>
-      
     </div>
   )
 }
