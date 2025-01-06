@@ -12,13 +12,10 @@ import { createUser } from "@/utils/actions"
 import FormOutput from "../formOutput/FormOutput"
 import { useState } from "react"
 
+
 const Form = () => {
   const [message, formActions] = useActionState(createUser, null)
   const users = useState([])
-
-  
-  
-
   return (
     <div>
       <Box
@@ -53,7 +50,7 @@ const Form = () => {
             <Grid
               container
               rowSpacing={2}
-              columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+              columnSpacing={{ xs: 1, sm: 2, md: 2 }}
             >
               <Grid item xs={6}>
                 <FormInput name="Name" />
@@ -91,13 +88,21 @@ const Form = () => {
                 }}
               >
                 <Btn msg="Reset" />
-                <Btn msg="Submit" />
+                <Btn msg="Submit" type="submit" />
               </Grid>
             </Grid>
           </form>
         </Box>
-        <FormOutput name={message?.Name } email={message?.Email} lastname note={message?.Note}/>
+        <FormOutput
+        name={message?.Name}
+        lastname={message?.Lastname}
+        email={message?.Email}
+        lastname
+        note={message?.Note}
+      />
+    
       </Box>
+      
     </div>
   )
 }

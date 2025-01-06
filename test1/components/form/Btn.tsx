@@ -6,10 +6,10 @@ type BtnProps = {
 }
 
 const Btn = (props: BtnProps) => {
-  const { msg } = props
+  const { msg, type } = props
   return (
     <div>
-      <Button variant="contained" type="submit" >
+      <Button variant="contained" type={type}>
         {msg}
       </Button>
     </div>
