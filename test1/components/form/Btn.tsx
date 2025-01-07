@@ -9,7 +9,7 @@ const Btn = (props: BtnProps) => {
   const { msg, type } = props
   return (
     <div>
-      <Button variant="contained" type={type}>
+      <Button variant="contained" type={type}  >
         {msg}
       </Button>
     </div>

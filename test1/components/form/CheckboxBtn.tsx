@@ -4,16 +4,17 @@ import FormControlLabel from "@mui/material/FormControlLabel"
 
 type CheckboxBtnProps = {
   label: string
+  name: string
 }
 
 const CheckboxBtn = (props: CheckboxBtnProps) => {
-  const { label } = props
+  const { label , name } = props
   return (
     <FormControlLabel
-      value="end"
-      control={<Checkbox />}
+      value={label}
+      control={<Checkbox value={name} />}
       label={label}
-      labelPlacement="end"
+      name={name}
     />
   )
 }

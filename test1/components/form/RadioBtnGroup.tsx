@@ -12,11 +12,11 @@ const RadioBtnGroup = () => {
         <RadioGroup
           row
           aria-labelledby="demo-row-radio-buttons-group-label"
-          name="row-radio-buttons-group"
+          name="gender"
         >
-          <FormControlLabel value="female" control={<Radio />} label="Female" />
-          <FormControlLabel value="male" control={<Radio />} label="Male" />
-          <FormControlLabel value="etc" control={<Radio />} label="Etc" />
+          <FormControlLabel value="Female" control={<Radio />} label="Female" />
+          <FormControlLabel value="Male" control={<Radio />} label="Male" />
+          <FormControlLabel value="Etc" control={<Radio />} label="Etc" />
         </RadioGroup>
       </FormControl>
     </div>

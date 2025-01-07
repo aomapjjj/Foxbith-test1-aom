@@ -7,32 +7,45 @@ import RadioBtnGroup from "./RadioBtnGroup"
 import CheckBoxBtnGroup from "./CheckBoxBtnGroup"
 import SelectBox from "./SelectBox"
 import Btn from "./Btn"
-import { useActionState } from "react"
-import { createUser } from "@/utils/actions"
+import { use, useActionState } from "react"
+
 import FormOutput from "../formOutput/FormOutput"
 import { useState } from "react"
 
-
 const Form = () => {
+
+  const [users, setUsers] = useState<any>([])
+  // const [tasksArray, setTasksArray] = useState([]);
+
+  const createUser = (prevState: any, formData: FormData) => {
+    const rawData = Object.fromEntries(formData)
+    const data = [...users , rawData ]
+
+    setUsers(data)
+  }
+
+  // console.log(users)
+
   const [message, formActions] = useActionState(createUser, null)
-  const users = useState([])
+
   return (
-    <div>
-      <Box
-        sx={{
-          margin: "20px",
-          "@media screen and (min-width:600px)": {
-            width: "700px",
-          },
-        }}
-      >
+    <Grid
+      container
+      rowSpacing={2}
+      columnSpacing={{ xs: 1, sm: 2, md: 2 }}
+      sx={{
+        m: 1,
+        p: 4,
+      }}
+    >
+      <Grid xs={12} md={6}>
         <Typography
           variant="h4"
           display="flex"
           component="div"
           sx={{ flexGrow: 1, justifyContent: "center", marginTop: "50px" }}
         >
-          <p>Profile management</p>
+          <p>Profile management </p>
         </Typography>
         <Box
           sx={{
@@ -53,16 +66,16 @@ const Form = () => {
               columnSpacing={{ xs: 1, sm: 2, md: 2 }}
             >
               <Grid item xs={6}>
-                <FormInput name="Name" />
+                <FormInput label="Name" name="name" />
               </Grid>
               <Grid item xs={6}>
-                <FormInput name="Lastname" />
+                <FormInput label="Lastname" name="lastname" />
               </Grid>
               <Grid item xs={12}>
-                <FormInput name="Email" />
+                <FormInput label="Email" name="email" />
               </Grid>
               <Grid item xs={12}>
-                <CheckboxBtn label="Confirm PDPA" />
+                <CheckboxBtn label="Confirm PDPA" name="confirm PDPA" />
               </Grid>
               <Grid item xs={6}>
                 <RadioBtnGroup />
@@ -74,7 +87,7 @@ const Form = () => {
                 <SelectBox />
               </Grid>
               <Grid item xs={12}>
-                <FormInput name="Note" />
+                <FormInput label="Note" name="note" />
               </Grid>
               <Grid
                 item
@@ -93,17 +106,14 @@ const Form = () => {
             </Grid>
           </form>
         </Box>
-        <FormOutput
-        name={message?.Name}
-        lastname={message?.Lastname}
-        email={message?.Email}
-        lastname
-        note={message?.Note}
-      />
-    
-      </Box>
+      </Grid>
+      <Grid xs={12} md={6}>
       
-    </div>
+       <FormOutput  users={users}  />
+       {/* <FormOutput name={users[0]?.name}  /> */}
+
+      </Grid>
+    </Grid>
   )
 }
 export default Form
