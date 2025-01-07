@@ -12,19 +12,46 @@ import { use, useActionState } from "react"
 import FormOutput from "../formOutput/FormOutput"
 import { useState } from "react"
 
-const Form = () => {
+const HOBBIES_INIT:any = {
+  game: false,
+  music: false,
+  craft: false,
+  reading: false,
+}
 
+const Form = () => {
   const [users, setUsers] = useState<any>([])
-  // const [tasksArray, setTasksArray] = useState([]);
+  const [hobbies, setHobbies] = useState({ ...HOBBIES_INIT })
+  const [confirmCheckBox, setConfirmCheckBox] = useState(false)
+
+const hobbiesBuilder = (hobbiesValue:any) => {
+  const result = Object.keys(hobbiesValue).filter((key:string) => hobbiesValue[key]);
+  return result;
+}
 
   const createUser = (prevState: any, formData: FormData) => {
     const rawData = Object.fromEntries(formData)
-    const data = [...users , rawData ]
-
+    const fomattedData = {
+      ...rawData,
+      confirmPDPA: confirmCheckBox,
+      hobbies: hobbiesBuilder(hobbies)
+    }
+    const data = [...users, fomattedData]
+    setHobbies({...HOBBIES_INIT})
+    setConfirmCheckBox(false)
     setUsers(data)
   }
 
-  // console.log(users)
+  const handleCheck = (field: any) => {
+    setHobbies((prev:any) => {
+      prev[field] = !prev[field];
+      return {...prev};
+    })
+  }
+
+  const handleCheckPDPA = () => {
+    setConfirmCheckBox(prev => !prev)
+  }
 
   const [message, formActions] = useActionState(createUser, null)
 
@@ -75,13 +102,18 @@ const Form = () => {
                 <FormInput label="Email" name="email" />
               </Grid>
               <Grid item xs={12}>
-                <CheckboxBtn label="Confirm PDPA" name="confirm PDPA" />
+                <CheckboxBtn
+                  checked={confirmCheckBox}
+                  onChange={handleCheckPDPA}
+                  label="Confirm PDPA"
+                  name="confirm PDPA"
+                />
               </Grid>
               <Grid item xs={6}>
                 <RadioBtnGroup />
               </Grid>
               <Grid item xs={6}>
-                <CheckBoxBtnGroup />
+                <CheckBoxBtnGroup hobbies={hobbies} setHobbies={handleCheck} />
               </Grid>
               <Grid item xs={12}>
                 <SelectBox />
@@ -108,10 +140,8 @@ const Form = () => {
         </Box>
       </Grid>
       <Grid xs={12} md={6}>
-      
-       <FormOutput  users={users}  />
-       {/* <FormOutput name={users[0]?.name}  /> */}
-
+        <FormOutput users={users} setUsers={setUsers} />
+        {/* <FormOutput name={users[0]?.name}  /> */}
       </Grid>
     </Grid>
   )

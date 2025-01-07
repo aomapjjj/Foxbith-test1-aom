@@ -3,7 +3,8 @@ import { Stringifier } from "styled-components/dist/types"
 import Grid from "@mui/material/Grid"
 import { Trash } from "lucide-react"
 import FormControlLabel from "@mui/material/FormControlLabel"
-import { Button , Checkbox } from "@mui/material"
+import { Button, Checkbox } from "@mui/material"
+import { useEffect, useState } from "react"
 
 type FormOutput = {
   // no?: String
@@ -15,6 +16,7 @@ type FormOutput = {
   // status?: string
   // note?: string
   users: userProps[]
+  setUsers: Function
 }
 
 type userProps = {
@@ -26,14 +28,23 @@ type userProps = {
   hobby?: string
   status?: string
   note?: string
+  confirmPDPA: boolean,
+  hobbies: string[]
 }
 
 const FormOutput = (props: FormOutput) => {
-  const { users } = props
+  let { users, setUsers } = props
+
+  const deleteItem = (index: any) => {
+    setUsers((prev: any) => {
+      const updatedList = prev.filter((item: any) => prev[index] !== item)
+      return [...updatedList]
+    })
+  }
 
   return (
     <div>
-      {users.map((user: any, index: any) => (
+      {users?.map((user: any, index: any) => (
         <Box
           key={index}
           sx={{
@@ -63,11 +74,11 @@ const FormOutput = (props: FormOutput) => {
               }}
             >
               <Button
-  onClick={() => {
-    alert('clicked');
-  }}
->
-              <Trash />
+                onClick={() => {
+                  deleteItem(index)
+                }}
+              >
+                <Trash />
               </Button>
             </Grid>
             <Grid item xs={6}>
@@ -80,7 +91,7 @@ const FormOutput = (props: FormOutput) => {
               <p>Gender : {user.gender ? user.gender : "-"}</p>
             </Grid>
             <Grid item xs={6}>
-              <p>Hobby : {user.hobby ? user.hobby : "-"} </p>
+              <p>Hobby : {user.hobbies ? user.hobbies.toString() : "-"} </p>
             </Grid>
             <Grid item xs={6}>
               <p>Status : {user.status ? user.status : "-"} </p>
@@ -91,7 +102,7 @@ const FormOutput = (props: FormOutput) => {
             <Grid item xs={6}>
               <FormControlLabel
                 disabled
-                control={<Checkbox />}
+                control={<Checkbox checked={user.confirmPDPA}/>}
                 label="Confirm PDPA"
               />
             </Grid>
