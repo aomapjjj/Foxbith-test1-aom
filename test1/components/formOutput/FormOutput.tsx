@@ -49,7 +49,7 @@ const FormOutput = (props: FormOutput) => {
           key={index}
           sx={{
             mt: 3,
-            width: "700px",
+            width: "100%",
             gap: 6,
             p: 2,
             boxShadow: 2,

@@ -7,10 +7,11 @@ type CheckboxBtnProps = {
   name: string
   onChange: any
   checked: boolean
+  value?:string
 }
 
 const CheckboxBtn = (props: CheckboxBtnProps) => {
-  const { label , name, onChange, checked } = props
+  const { label , name, onChange, checked , value } = props
   return (
     <FormControlLabel
       value={label}

@@ -12,45 +12,70 @@ import { use, useActionState } from "react"
 import FormOutput from "../formOutput/FormOutput"
 import { useState } from "react"
 
-const HOBBIES_INIT:any = {
+const HOBBIES_INIT: any = {
   game: false,
   music: false,
   craft: false,
   reading: false,
 }
 
+const USER_INIT: any = {
+  no: "",
+  name: "",
+  lastname: "",
+  email: "",
+  gender: "Male",
+  hobby: "",
+  status: "",
+  note: "",
+}
+
 const Form = () => {
   const [users, setUsers] = useState<any>([])
+  const [value, setValue] = useState<any>({ ...USER_INIT })
   const [hobbies, setHobbies] = useState({ ...HOBBIES_INIT })
   const [confirmCheckBox, setConfirmCheckBox] = useState(false)
 
-const hobbiesBuilder = (hobbiesValue:any) => {
-  const result = Object.keys(hobbiesValue).filter((key:string) => hobbiesValue[key]);
-  return result;
-}
+  const hobbiesBuilder = (hobbiesValue: any) => {
+    const result = Object.keys(hobbiesValue).filter(
+      (key: string) => hobbiesValue[key]
+    )
+    return result
+  }
+
+  const resetForm = () => {
+    setValue({ ...USER_INIT })
+    setHobbies({ ...HOBBIES_INIT })
+    setConfirmCheckBox(false)
+  }
 
   const createUser = (prevState: any, formData: FormData) => {
     const rawData = Object.fromEntries(formData)
     const fomattedData = {
       ...rawData,
       confirmPDPA: confirmCheckBox,
-      hobbies: hobbiesBuilder(hobbies)
+      hobbies: hobbiesBuilder(hobbies),
     }
     const data = [...users, fomattedData]
-    setHobbies({...HOBBIES_INIT})
-    setConfirmCheckBox(false)
     setUsers(data)
   }
 
   const handleCheck = (field: any) => {
-    setHobbies((prev:any) => {
-      prev[field] = !prev[field];
-      return {...prev};
+    setHobbies((prev: any) => {
+      prev[field] = !prev[field]
+      return { ...prev }
     })
   }
 
   const handleCheckPDPA = () => {
-    setConfirmCheckBox(prev => !prev)
+    setConfirmCheckBox((prev) => !prev)
+  }
+
+  const handleChange = (event: any, field: string) => {
+    setValue((prev: any) => {
+      prev[field] = event.target.value
+      return { ...prev }
+    })
   }
 
   const [message, formActions] = useActionState(createUser, null)
@@ -61,11 +86,13 @@ const hobbiesBuilder = (hobbiesValue:any) => {
       rowSpacing={2}
       columnSpacing={{ xs: 1, sm: 2, md: 2 }}
       sx={{
-        m: 1,
-        p: 4,
+        p: 2,
       }}
     >
-      <Grid xs={12} md={6}>
+      <Grid xs={12} md={6}
+      sx={{
+        p: 2,
+      }}>
         <Typography
           variant="h4"
           display="flex"
@@ -91,15 +118,31 @@ const hobbiesBuilder = (hobbiesValue:any) => {
               container
               rowSpacing={2}
               columnSpacing={{ xs: 1, sm: 2, md: 2 }}
+
             >
               <Grid item xs={6}>
-                <FormInput label="Name" name="name" />
+                <FormInput
+                  label="Name"
+                  name="name"
+                  value={value?.name}
+                  onChange={(e: any) => handleChange(e, "name")}
+                />
               </Grid>
               <Grid item xs={6}>
-                <FormInput label="Lastname" name="lastname" />
+                <FormInput
+                  label="Lastname"
+                  name="lastname"
+                  value={value?.lastname}
+                  onChange={(e: any) => handleChange(e, "lastname")}
+                />
               </Grid>
               <Grid item xs={12}>
-                <FormInput label="Email" name="email" />
+                <FormInput
+                  label="Email"
+                  name="email"
+                  value={value?.email}
+                  onChange={(e: any) => handleChange(e, "email")}
+                />
               </Grid>
               <Grid item xs={12}>
                 <CheckboxBtn
@@ -110,16 +153,27 @@ const hobbiesBuilder = (hobbiesValue:any) => {
                 />
               </Grid>
               <Grid item xs={6}>
-                <RadioBtnGroup />
+                <RadioBtnGroup
+                  value={value?.gender}
+                  onChange={(e: any) => handleChange(e, "gender")}
+                />
               </Grid>
               <Grid item xs={6}>
                 <CheckBoxBtnGroup hobbies={hobbies} setHobbies={handleCheck} />
               </Grid>
               <Grid item xs={12}>
-                <SelectBox />
+                <SelectBox
+                  value={value.status}
+                  onChange={(e: any) => handleChange(e, "status")}
+                />
               </Grid>
               <Grid item xs={12}>
-                <FormInput label="Note" name="note" />
+                <FormInput
+                  label="Note"
+                  name="note"
+                  value={value?.note}
+                  onChange={(e: any) => handleChange(e, "note")}
+                />
               </Grid>
               <Grid
                 item
@@ -132,16 +186,15 @@ const hobbiesBuilder = (hobbiesValue:any) => {
                   gap: 2,
                 }}
               >
-                <Btn msg="Reset" />
+                <Btn msg="Reset" action={resetForm} />
                 <Btn msg="Submit" type="submit" />
               </Grid>
             </Grid>
           </form>
         </Box>
       </Grid>
-      <Grid xs={12} md={6}>
+      <Grid xs={8} md={6}>
         <FormOutput users={users} setUsers={setUsers} />
-        {/* <FormOutput name={users[0]?.name}  /> */}
       </Grid>
     </Grid>
   )

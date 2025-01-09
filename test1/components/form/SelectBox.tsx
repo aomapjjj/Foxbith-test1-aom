@@ -17,18 +17,15 @@ const statuses = [
   },
 ]
 
-const SelectBox = () => {
-  const [value, setValue] = useState("");
+const SelectBox = (props:any) => {
 
-  const handleChange = (event: any) => {
-    setValue(event.target.value as string);
-  };
+  const {value, onChange} = props;
 
   return (
     <div>
-      <TextField id="status" name="status" select label="Status" value={value}  sx={{ width: "100%" }} onChange={handleChange}>
+      <TextField id="status" name="status" select label="Status" value={value}  sx={{ width: "100%" }} onChange={onChange}>
         {statuses.map((option) => (
-          <MenuItem key={option.value} value={option.value}>
+          <MenuItem key={option.value} value={option.value} >
             {option.label}
           </MenuItem>
         ))}
