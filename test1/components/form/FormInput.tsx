@@ -2,13 +2,13 @@ import TextField from "@mui/material/TextField"
 
 type FormInputProps = {
   name: string
-  value?:string
+  value?: string
   label: string
-  onChange?:any
+  onChange?: any
 }
 
 const FormInput = (props: FormInputProps) => {
-  const { name , label , value , onChange} = props
+  const { name, label, value, onChange } = props
   return (
     <>
       <TextField
@@ -19,7 +19,6 @@ const FormInput = (props: FormInputProps) => {
         variant="outlined"
         onChange={onChange}
         sx={{ width: "100%" }}
-
       />
     </>
   )

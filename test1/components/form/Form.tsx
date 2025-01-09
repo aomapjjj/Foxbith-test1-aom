@@ -7,7 +7,7 @@ import RadioBtnGroup from "./RadioBtnGroup"
 import CheckBoxBtnGroup from "./CheckBoxBtnGroup"
 import SelectBox from "./SelectBox"
 import Btn from "./Btn"
-import { use, useActionState } from "react"
+import { useActionState } from "react"
 
 import FormOutput from "../formOutput/FormOutput"
 import { useState } from "react"
@@ -89,10 +89,13 @@ const Form = () => {
         p: 2,
       }}
     >
-      <Grid xs={12} md={6}
-      sx={{
-        p: 2,
-      }}>
+      <Grid
+        xs={12}
+        md={6}
+        sx={{
+          p: 2,
+        }}
+      >
         <Typography
           variant="h4"
           display="flex"
@@ -118,7 +121,6 @@ const Form = () => {
               container
               rowSpacing={2}
               columnSpacing={{ xs: 1, sm: 2, md: 2 }}
-
             >
               <Grid item xs={6}>
                 <FormInput

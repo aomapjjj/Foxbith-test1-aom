@@ -7,14 +7,6 @@ import { Button, Checkbox } from "@mui/material"
 import { useEffect, useState } from "react"
 
 type FormOutput = {
-  // no?: String
-  // name?: String
-  // lastname?: string
-  // email?: String
-  // gender?: String
-  // hobby?: string
-  // status?: string
-  // note?: string
   users: userProps[]
   setUsers: Function
 }
@@ -28,7 +20,7 @@ type userProps = {
   hobby?: string
   status?: string
   note?: string
-  confirmPDPA: boolean,
+  confirmPDPA: boolean
   hobbies: string[]
 }
 
@@ -102,7 +94,7 @@ const FormOutput = (props: FormOutput) => {
             <Grid item xs={6}>
               <FormControlLabel
                 disabled
-                control={<Checkbox checked={user.confirmPDPA}/>}
+                control={<Checkbox checked={user.confirmPDPA} />}
                 label="Confirm PDPA"
               />
             </Grid>

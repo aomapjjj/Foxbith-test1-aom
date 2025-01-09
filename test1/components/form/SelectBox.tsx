@@ -17,15 +17,22 @@ const statuses = [
   },
 ]
 
-const SelectBox = (props:any) => {
-
-  const {value, onChange} = props;
+const SelectBox = (props: any) => {
+  const { value, onChange } = props
 
   return (
     <div>
-      <TextField id="status" name="status" select label="Status" value={value}  sx={{ width: "100%" }} onChange={onChange}>
+      <TextField
+        id="status"
+        name="status"
+        select
+        label="Status"
+        value={value}
+        sx={{ width: "100%" }}
+        onChange={onChange}
+      >
         {statuses.map((option) => (
-          <MenuItem key={option.value} value={option.value} >
+          <MenuItem key={option.value} value={option.value}>
             {option.label}
           </MenuItem>
         ))}
