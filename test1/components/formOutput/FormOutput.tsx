@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box"
 import { Stringifier } from "styled-components/dist/types"
 import Grid from "@mui/material/Grid"
-import { Trash } from "lucide-react"
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline"
 import FormControlLabel from "@mui/material/FormControlLabel"
 import { Button, Checkbox } from "@mui/material"
 import { useEffect, useState } from "react"
@@ -45,7 +45,7 @@ const FormOutput = (props: FormOutput) => {
             gap: 6,
             p: 2,
             boxShadow: 2,
-            backgroundColor: "white",
+            backgroundColor: "white"
           }}
         >
           <Grid
@@ -62,7 +62,7 @@ const FormOutput = (props: FormOutput) => {
               sx={{
                 display: "flex",
                 justifyContent: "flex-end",
-                gap: 2,
+                gap: 2
               }}
             >
               <Button
@@ -70,7 +70,9 @@ const FormOutput = (props: FormOutput) => {
                   deleteItem(index)
                 }}
               >
-                <Trash />
+                <DeleteOutlineIcon sx={{
+                  color:"black"
+                }} />
               </Button>
             </Grid>
             <Grid item xs={6}>
@@ -83,7 +85,10 @@ const FormOutput = (props: FormOutput) => {
               <p>Gender : {user.gender ? user.gender : "-"}</p>
             </Grid>
             <Grid item xs={6}>
-              <p>Hobby : {user.hobbies.toString() ? user.hobbies.toString() : "-"} </p>
+              <p>
+                Hobby :{" "}
+                {user.hobbies.toString() ? user.hobbies.toString() : "-"}{" "}
+              </p>
             </Grid>
             <Grid item xs={6}>
               <p>Status : {user.status ? user.status : "-"} </p>
