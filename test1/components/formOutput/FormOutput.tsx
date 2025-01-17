@@ -83,7 +83,7 @@ const FormOutput = (props: FormOutput) => {
               <p>Gender : {user.gender ? user.gender : "-"}</p>
             </Grid>
             <Grid item xs={6}>
-              <p>Hobby : {user.hobbies ? user.hobbies.toString() : "-"} </p>
+              <p>Hobby : {user.hobbies.toString() ? user.hobbies.toString() : "-"} </p>
             </Grid>
             <Grid item xs={6}>
               <p>Status : {user.status ? user.status : "-"} </p>
