@@ -114,6 +114,8 @@ const Form = () => {
             p: 2,
             boxShadow: 2,
             backgroundColor: "white",
+            width:"100%",
+            height:"5"
           }}
         >
           <form action={formActions}>
@@ -195,7 +197,7 @@ const Form = () => {
           </form>
         </Box>
       </Grid>
-      <Grid xs={8} md={6}>
+      <Grid xs={12} md={6}>
         <FormOutput users={users} setUsers={setUsers} />
       </Grid>
     </Grid>

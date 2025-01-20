@@ -43,16 +43,13 @@ const FormOutput = (props: FormOutput) => {
             mt: 3,
             width: "100%",
             gap: 6,
-            p: 2,
+            my: 3,
             boxShadow: 2,
+            p: 2,
             backgroundColor: "white"
           }}
         >
-          <Grid
-            container
-            rowSpacing={2}
-            columnSpacing={{ xs: 1, sm: 2, md: 2 }}
-          >
+          <Grid container rowSpacing={2}>
             <Grid item xs={6}>
               <h2>USER {index + 1} </h2>
             </Grid>
@@ -70,9 +67,11 @@ const FormOutput = (props: FormOutput) => {
                   deleteItem(index)
                 }}
               >
-                <DeleteOutlineIcon sx={{
-                  color:"black"
-                }} />
+                <DeleteOutlineIcon
+                  sx={{
+                    color: "black"
+                  }}
+                />
               </Button>
             </Grid>
             <Grid item xs={6}>
