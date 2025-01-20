@@ -91,9 +91,11 @@ const Form = () => {
     >
       <Grid
         xs={12}
-        md={6}
+        md={5}
         sx={{
           p: 2,
+          pr:"24px"
+
         }}
       >
         <Typography
@@ -197,7 +199,11 @@ const Form = () => {
           </form>
         </Box>
       </Grid>
-      <Grid xs={12} md={6}>
+      <Grid xs={12} md={7} sx={{
+        pt:"24px",
+        pl:"24px"
+       
+      }}>
         <FormOutput users={users} setUsers={setUsers} />
       </Grid>
     </Grid>
